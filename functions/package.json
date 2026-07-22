@@ -1,0 +1,16 @@
+{
+  "name": "cropsign-functions",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "engines": {
+    "node": "22"
+  },
+  "dependencies": {
+    "@contentauth/c2pa-node": "^0.6.3",
+    "@google-cloud/kms": "^5.7.0",
+    "firebase-admin": "^14.2.0",
+    "firebase-functions": "^7.3.0",
+    "sharp": "^0.35.3"
+  }
+}

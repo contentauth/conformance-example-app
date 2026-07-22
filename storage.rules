@@ -1,0 +1,15 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Users upload the original JPEG and can read back both files.
+    // The cropped, signed copy is written by the backend only.
+    match /uploads/{userId}/{uploadId}/{fileName} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null
+                   && request.auth.uid == userId
+                   && fileName == 'original.jpg'
+                   && request.resource.contentType == 'image/jpeg'
+                   && request.resource.size < 20 * 1024 * 1024;
+    }
+  }
+}

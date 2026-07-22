@@ -1,0 +1,11 @@
+{
+  "name": "cropsign-scripts",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@google-cloud/kms": "^5.7.0",
+    "@peculiar/x509": "^2.0.0",
+    "firebase-admin": "^14.2.0",
+    "reflect-metadata": "^0.2.2"
+  }
+}

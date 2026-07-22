@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+*.log
+.firebase/
+
+# signing material – never commit these
+*.pem
+*.crt
+*.key

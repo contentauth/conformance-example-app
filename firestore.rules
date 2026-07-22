@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users can read their own upload records. Only the backend writes them.
+    match /users/{userId}/uploads/{uploadId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    // The signing config (KMS key paths, certificate chain) is backend-only.
+    match /config/{document} {
+      allow read, write: if false;
+    }
+  }
+}
