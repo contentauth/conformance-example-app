@@ -1,33 +1,39 @@
 # CropSign
 
-A basic demo of a C2PA signing app. You sign in, upload a JPEG, and the backend
+This repo contains a basic demo of a C2PA signing app. You sign in, upload a JPEG, and the backend
 crops it to a 500×500 square and signs the result with a C2PA manifest built
-with the CAI Node SDK. The manifest records the original upload as its
-parentOf ingredient plus the opened, resized, and cropped actions (all as
+with the CAI Node library. The manifest records the original upload as its
+`parentOf` ingredient plus the opened, resized, and cropped actions (all as
 created assertions), validates ingredients against the official C2PA trust
 lists, and gets timestamped by the SSL.com C2PA TSA. The signing key lives in
 Google Cloud KMS and never leaves it.
 
-> **Heads up:** this is a tutorial project, for learning and demos only. It
+> [!NOTE] this is a tutorial project, for learning and demos only. It
 > relies on paid services — the Firebase Blaze plan and Google Cloud KMS — and
 > it is not intended for production use. Delete the project when you're done
 > so you don't keep getting billed.
 
-Firebase (Auth, Storage, Firestore, Functions) + Node + Vue + Tailwind.
+Licensed under the [MIT](https://github.com/contentauth/c2pa-ios-example/blob/main/LICENSE-MIT) license.
 
-## You need
+## Prerequisites
+
+This project uses [Firebase](https://firebase.google.com/) (Authorization, Storage, Firestore, Cloud Functions), [Node.js](https://nodejs.org/), [Vue.js](https://vuejs.org/), and [Tailwind CSS](https://tailwindcss.com/).
+
+Requirements:
 
 - Node 22 or newer
-- A Firebase account. Cloud KMS needs billing, so the project has to be on
+- A Firebase account. Cloud KMS needs billing, so the project has to be on 
   the Blaze plan.
 - The `firebase`, `gcloud`, and `step` CLIs
   (`brew install firebase-cli google-cloud-sdk step`)
 
-## 1. Set up the project
+## Build, deploy, and run the project
 
-Create a project at console.firebase.google.com and upgrade it to Blaze. In
-the console, turn on **Authentication → Email/Password** and click Get
-started under **Storage**. Add a web app under Project settings and paste its
+### 1. Set up the project
+
+Create a project at [Firebase Console](https://console.firebase.google.com) and upgrade it to Blaze. In
+the console, turn on **Authentication → Email/Password** and click **Get
+started** under **Storage**. Add a web app under Project settings and paste its
 config into `web/src/firebaseConfig.js`.
 
 Then sign in on the command line and wire everything up:
@@ -42,7 +48,7 @@ gcloud services enable cloudkms.googleapis.com compute.googleapis.com
 gcloud firestore databases create --location=nam5
 ```
 
-## 2. Make the signing key and certificate
+### 2. Make the signing key and certificate
 
 The key is created in Cloud KMS, and the certificate comes from a small demo
 CA you make with the step CLI. (A real conforming product gets its
@@ -72,7 +78,7 @@ If step says `csr.pem` is missing, the createCsr.js run above didn't finish —
 fix that first. Otherwise the chain is now in Firestore next to the key
 paths — everything the backend needs.
 
-## 3. Deploy
+### 3. Deploy
 
 Let the functions runtime use the KMS key. (Functions run as the default
 compute service account, which appeared when Compute Engine was enabled in
@@ -93,16 +99,16 @@ cd web && npm install && cd ..
 firebase deploy
 ```
 
-## 4. Try it
+### 4. Try it
 
 Your app is live at `https://YOUR_PROJECT_ID.web.app`.
 
 Open it, create an account, and upload a JPEG. You get download
 links for the original and the cropped, signed copy. Drop the signed one on
-https://verify.contentauthenticity.org — you'll see the parent ingredient,
-the opened, resized, and cropped actions, and the SSL.com timestamp. The
-signer shows as untrusted because your demo CA isn't on the C2PA trust list;
-that's expected.
+[https://verify.contentauthenticity.org](https://verify.contentauthenticity.org).
+You'll see the parent ingredient, the opened, resized, and cropped actions, 
+and the SSL.com timestamp. The signer shows as untrusted because your demo 
+CA isn't on the C2PA trust list; that's expected.
 
 For local development, `npm run dev` inside `web/` serves the same app
 against your deployed backend.
@@ -111,7 +117,7 @@ against your deployed backend.
 
 - `functions/imageEditor.js` — crops to 500×500 with sharp
 - `functions/assertionManager.js` — turns the edits into C2PA actions
-- `functions/manifestManager.js` — builds the manifest: parentOf ingredient,
+- `functions/manifestManager.js` — builds the manifest: `parentOf` ingredient,
   edit intent, created assertions, trust lists, TSA
 - `functions/kmsSigner.js` — signs claim bytes with Cloud KMS
 - `scripts/createCsr.js` — makes the KMS key and a CSR signed by it
