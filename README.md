@@ -13,7 +13,7 @@ Google Cloud KMS and never leaves it.
 > it is not intended for production use. Delete the project when you're done
 > so you don't keep getting billed.
 
-Licensed under the [MIT](https://github.com/contentauth/c2pa-ios-example/blob/main/LICENSE-MIT) license.
+Licensed under the [MIT](https://github.com/contentauth/cropsign/blob/main/LICENSE-MIT) license.
 
 ## Prerequisites
 
