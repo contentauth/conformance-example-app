@@ -19,7 +19,7 @@ onAuthStateChanged(auth, (currentUser) => {
   <div class="min-h-screen bg-gray-50 text-gray-900">
     <header class="border-b border-gray-200 bg-white">
       <div class="mx-auto flex max-w-2xl items-center justify-between px-4 py-3">
-        <h1 class="text-lg font-semibold">CropSign</h1>
+        <h1 class="text-lg font-semibold">Conformance-example-app</h1>
         <button
           v-if="user"
           class="text-sm text-gray-500 hover:text-gray-900"
