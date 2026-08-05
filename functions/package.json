@@ -1,5 +1,5 @@
 {
-  "name": "cropsign-functions",
+  "name": "conformance-example-app-functions",
   "private": true,
   "type": "module",
   "main": "index.js",

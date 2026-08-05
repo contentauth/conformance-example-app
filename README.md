@@ -1,6 +1,11 @@
-# CropSign
+# Conformance example app
 
-This repo contains a basic demo of a C2PA signing app. You sign in, upload a JPEG, and the backend
+> [!WARNING]
+> This example app is still under technical review and may contain unknown bugs.
+> You are advised to wait until the review is complete before relying on it as an example.
+
+This repo contains a basic demo (`conformance-example-app`) of a C2PA signing app. 
+You sign in, upload a JPEG, and the backend
 crops it to a 500×500 square and signs the result with a C2PA manifest built
 with the CAI Node library. The manifest records the original upload as its
 `parentOf` ingredient plus the opened, resized, and cropped actions (all as
@@ -8,12 +13,13 @@ created assertions), validates ingredients against the official C2PA trust
 lists, and gets timestamped by the SSL.com C2PA TSA. The signing key lives in
 Google Cloud KMS and never leaves it.
 
-> [!NOTE] this is a tutorial project, for learning and demos only. It
+> [!NOTE] 
+> This is a tutorial project, for learning and demos only. It
 > relies on paid services — the Firebase Blaze plan and Google Cloud KMS — and
 > it is not intended for production use. Delete the project when you're done
 > so you don't keep getting billed.
 
-Licensed under the [MIT](https://github.com/contentauth/cropsign/blob/main/LICENSE-MIT) license.
+Licensed under the [MIT](https://github.com/contentauth/conformance-example-app/blob/main/LICENSE-MIT) license.
 
 ## Prerequisites
 
@@ -58,7 +64,7 @@ that.)
 ```sh
 cd scripts
 npm install
-node createCsr.js "CropSign" "Example Corp."
+node createCsr.js "conformance-example-app" "Example Corp."
 ```
 
 That creates the KMS key, writes `csr.pem`, and records the key paths in
@@ -67,7 +73,7 @@ root CA and sign the CSR — one year, with the C2PA claim signing EKU from
 `c2pa-cert.tpl`:
 
 ```sh
-step certificate create --profile root-ca "CropSign Demo Root" root.crt root.key
+step certificate create --profile root-ca "conformance-example-app Demo Root" root.crt root.key
 step certificate sign --template c2pa-cert.tpl --not-after 8760h csr.pem root.crt root.key > cert.pem
 cat cert.pem root.crt > chain.pem
 node saveCertificate.js chain.pem

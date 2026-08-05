@@ -1,5 +1,5 @@
 {
-  "name": "cropsign-web",
+  "name": "conformance-example-app-web",
   "private": true,
   "type": "module",
   "scripts": {
