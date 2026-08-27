@@ -7,7 +7,8 @@
 This repo contains a basic demo (`conformance-example-app`) of a C2PA signing app. 
 You sign in, upload a JPEG, and the backend
 crops it to a 500×500 square and signs the result with a C2PA manifest built
-with the CAI Node library. The manifest records the original upload as its
+with the [CAI Node](https://github.com/contentauth/c2pa-js/blob/main/packages/c2pa-node/README.md)
+ library. The manifest records the original upload as its
 `parentOf` ingredient plus the opened, resized, and cropped actions (all as
 created assertions), validates ingredients against the official C2PA trust
 lists, and gets timestamped by the SSL.com C2PA TSA. The signing key lives in
