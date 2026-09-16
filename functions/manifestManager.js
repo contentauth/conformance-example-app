@@ -30,7 +30,11 @@ async function loadSettings(ourCertificateChainPem) {
         user_anchors: ourCertificateChainPem,
       },
       verify: { verify_trust: true, verify_timestamp_trust: true },
-      builder: { created_assertion_labels: CREATED_ASSERTION_LABELS },
+      builder: {
+        created_assertion_labels: CREATED_ASSERTION_LABELS,
+        // Conformance requires allActionsIncluded to be set explicitly.
+        actions: { all_actions_included: true },
+      },
     };
   }
   return cachedSettings;
@@ -52,7 +56,11 @@ export async function signWithManifest({ title, originalJpeg, croppedJpeg, editA
     {
       title,
       claim_version: 2,
-      claim_generator_info: [{ name: "CropSign", version: "1.0.0" }],
+      // specVersion is the C2PA spec version this generator targets (required
+      // by conformance); the SDK does not fill it in automatically.
+      claim_generator_info: [
+        { name: "Conformance Example App", version: "1.0.0", specVersion: "2.4.0" },
+      ],
     },
     await loadSettings(signer.certificateChainPem),
   );
