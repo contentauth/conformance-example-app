@@ -31,8 +31,8 @@ Requirements:
 - Node 22 or newer
 - A Firebase account. Cloud KMS needs billing, so the project has to be on 
   the Blaze plan.
-- The `firebase`, `gcloud`, and `step` CLIs
-  (`brew install firebase-cli google-cloud-sdk step`)
+- The `firebase`, `gcloud`, `step`, and `osv-scanner` CLIs
+  (`brew install firebase-cli google-cloud-sdk step osv-scanner`)
 
 ## Build, deploy, and run the project
 
@@ -106,6 +106,15 @@ cd web && npm install && cd ..
 firebase deploy
 ```
 
+Before every deploy, scan the backend's dependencies:
+
+```sh
+./scripts/scanDependencies.sh
+```
+
+Fix any High or Critical finding before you deploy (usually `npm audit fix`
+in `functions/`). Lower severities are yours to judge.
+
 ### 4. Try it
 
 Your app is live at `https://YOUR_PROJECT_ID.web.app`.
@@ -129,3 +138,4 @@ against your deployed backend.
 - `functions/kmsSigner.js` — signs claim bytes with Cloud KMS
 - `scripts/createCsr.js` — makes the KMS key and a CSR signed by it
 - `scripts/saveCertificate.js` — puts the certificate chain in Firestore
+- `scripts/scanDependencies.sh` — vulnerability scan to run before deploys

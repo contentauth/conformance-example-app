@@ -143,11 +143,13 @@ _(Refers to C2PA Generator Product Security Requirements §6.3 / Objective O.3)_
 
 _**Applicability:** Required for Assurance Level 1 and Level 2_
 
-1. **SCA / SBOM Scanning Tools**: OSV-Scanner runs against the dependency
-   lockfile on every deploy.
-2. **90-Day Remediation Policy**: Any CRITICAL or HIGH finding (CVSS v3+)
-   blocks the deploy until it is fixed or mitigated, satisfying the 90-day
-   remediation requirement.
+1. **SCA / SBOM Scanning Tools**: OSV-Scanner is run against the dependency
+   lockfile before every deploy, as a documented operational convention of
+   the deployment process.
+2. **90-Day Remediation Policy**: Deployment is a manual administrator
+   action. Any CRITICAL or HIGH finding (CVSS v3+) blocks the deploy until
+   the affected dependency is updated, satisfying the 90-day remediation
+   requirement.
 
 #### 2.3.2 Assurance Level 2 Additional Evidence (Exploit Countermeasures, Static Analysis & Patch Recency)
 
@@ -166,11 +168,11 @@ _(Refers to C2PA Generator Product Security Requirements §6.4 / Objective O.4)_
 _**Applicability:** Required for Assurance Level 1 and Level 2_
 
 1. **SCA / SBOM Scanning Tools**: The upload handler, crop engine, and
-   signer live in one codebase covered by the same OSV-Scanner deploy gate
+   signer live in one codebase covered by the same OSV-Scanner scan
    described in 2.3.1.
-2. **90-Day Remediation Policy**: The same pipeline control applies:
-   CRITICAL or HIGH findings in content-processing software block deployment
-   until fixed or mitigated.
+2. **90-Day Remediation Policy**: The same convention applies: CRITICAL or
+   HIGH findings in content-processing software block deployment until the
+   affected dependency is updated.
 
 #### 2.4.2 Assurance Level 2 Additional Evidence (Countermeasures, Static Analysis, Kernel Isolation & Patch Recency)
 
@@ -219,12 +221,13 @@ _**Applicability:** Required for Assurance Level 1 and Level 2 for Distributed a
    storage buckets, and signing configuration to the signing service's
    service account and administrators.
 4. **Vulnerability Scanning & OWASP Top 10 Coverage**: Dependency scanning
-   runs on every deploy (2.3.1), and a periodic security review covers the
-   OWASP Top 10 web application vulnerabilities.
-5. **Timely Remediation Policy**: CRITICAL and HIGH findings block
-   deployment until resolved; identified vulnerabilities are tracked and
-   remediated within the required timelines (30 days High, 90 days Moderate,
-   180 days Low). OS patching is handled by the managed cloud platform.
+   is performed before every deploy (2.3.1), and a periodic security review
+   covers the OWASP Top 10 web application vulnerabilities.
+5. **Timely Remediation Policy**: CRITICAL and HIGH dependency findings
+   block deployment until resolved; identified vulnerabilities are tracked
+   and remediated within the required timelines (30 days High, 90 days
+   Moderate, 180 days Low). OS patching is handled by the managed cloud
+   platform.
 
 #### 2.6.2 Assurance Level 2 Additional Evidence for Distributed & Backend Classes (Audit Logging, HIDS, Network Segmentation & Attached Reports)
 
