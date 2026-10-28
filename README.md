@@ -1,15 +1,8 @@
 # Conformance example app
 
-> [!WARNING]
-> This example app is still under technical review and may contain unknown bugs.
-> You are advised to wait until the review is complete before relying on it as an example.
+The [conformance-example-app repo](https://github.com/contentauth/conformance-example-app) contains a basic demo (`conformance-example-app`) of a C2PA signing app. 
 
-This repo contains a basic demo (`conformance-example-app`) of a C2PA signing app. 
-You sign in, upload a JPEG, and the backend
-crops it to a 500×500 square and signs the result with a C2PA manifest built
-with the [CAI Node](https://github.com/contentauth/c2pa-js/blob/main/packages/c2pa-node/README.md)
- library. The manifest records the original upload as its
-`parentOf` ingredient plus the opened, resized, and cropped actions (all as
+To use the app, sign in and upload a JPEG file. Then the backend crops it to a 500×500 square and signs the result with a C2PA manifest built with the [CAI Node.js](https://github.com/contentauth/c2pa-js/blob/main/packages/c2pa-node/README.md) library. The manifest records the original upload as its `parentOf` ingredient plus the opened, resized, and cropped actions (all as
 created assertions), validates ingredients against the official C2PA trust
 lists, and gets timestamped by the SSL.com C2PA TSA. The signing key lives in
 Google Cloud KMS and never leaves it.
@@ -28,7 +21,7 @@ This project uses [Firebase](https://firebase.google.com/) (Authorization, Stora
 
 Requirements:
 
-- Node 22 or newer
+- Node.js 22 or newer
 - A Firebase account. Cloud KMS needs billing, so the project has to be on 
   the Blaze plan.
 - The `firebase`, `gcloud`, `step`, and `osv-scanner` CLIs
