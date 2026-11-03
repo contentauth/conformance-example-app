@@ -5,7 +5,7 @@ const C2PA_TRUST_LIST_URL =
   "https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TRUST-LIST.pem";
 const C2PA_TSA_TRUST_LIST_URL =
   "https://raw.githubusercontent.com/c2pa-org/conformance-public/main/trust-list/C2PA-TSA-TRUST-LIST.pem";
-const TIMESTAMP_AUTHORITY_URL = "http://ts-c2pa.ssl.com/ecc";
+const TIMESTAMP_AUTHORITY_URL = "https://ts-c2pa.ssl.com/ecc";
 
 // Assertions we author ourselves are marked "created" in the claim;
 // everything else stays "gathered".
